@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paula Isabella | Invitación mágica</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ color:#765644;
+ font-family:Georgia,serif;
+ text-align:center;
+ background:linear-gradient(145deg,#fffdfc,#f8e2e9,#e5eedf,#f0e6f3);
+ min-height:100vh;
+}
+main{padding:25px 18px 45px;max-width:520px;margin:auto}
+.forest{font-size:30px;letter-spacing:8px;margin-top:10px}
+.small{font-size:12px;letter-spacing:4px;text-transform:uppercase}
+h1{font-size:clamp(35px,10vw,53px);font-weight:normal;color:#a87967;margin:12px 0}
+h2{font-size:27px;font-weight:normal}
+p{line-height:1.8}
+.card{
+ background:rgba(255,254,252,.83);
+ border:1px solid #d6b16d;
+ border-radius:180px 180px 24px 24px;
+ padding:28px 20px;
+ box-shadow:0 12px 35px #94755b18;
+}
+.hidden{display:none}
+button{
+ border:1px solid #c7a36d;
+ border-radius:30px;
+ background:#fffdf9;
+ color:#805d49;
+ padding:13px 20px;
+ font-family:inherit;
+ font-size:15px;
+ cursor:pointer;
+ margin:7px 3px;
+}
+button:active{transform:scale(.98)}
+.envelope{
+ width:170px;height:115px;margin:35px auto 20px;
+ position:relative;cursor:pointer;
+ background:#e9c5d2;border-radius:8px;
+ box-shadow:0 8px 20px #805d4920;
+}
+.envelope:before{
+ content:"";position:absolute;inset:0;
+ background:#f4dce5;
+ clip-path:polygon(0 0,50% 55%,100% 0);
+ z-index:2;transform-origin:top;
+ transition:transform .8s;
+}
+.envelope:after{
+ content:"";position:absolute;inset:0;
+ background:#dfb5c5;
+ clip-path:polygon(0 100%,50% 43%,100% 100%);
+}
+.seal{
+ position:absolute;z-index:3;top:40px;left:67px;
+ font-size:32px;transition:opacity .4s;
+}
+.envelope.open:before{transform:rotateX(180deg)}
+.envelope.open .seal{opacity:0}
+.note{font-size:12px;letter-spacing:2px}
+.divider{color:#c5a16c;letter-spacing:5px;margin:20px}
+.details{
+ background:#fffdf9bd;border-radius:22px;
+ padding:20px;margin:20px 0;border:1px solid #ead7bc;
+}
+#countdown{display:flex;justify-content:center;gap:8px;margin:20px 0}
+.time{
+ background:#fffdfc;border:1px solid #ead7bc;
+ border-radius:13px;padding:12px 5px;flex:1;min-width:0;
+}
+.time strong{display:block;font-size:23px;font-weight:normal}
+.time span{font-size:10px;letter-spacing:1px}
+.fairy{font-size:27px}
+footer{font-size:12px;margin-top:30px;line-height:2}
+</style>
+</head>
+<body>
+<main>
+ <div class="forest">🍄 ✧ 🌿 ✧ 🍄</div>
+ <p class="small">Una historia llena de magia</p>
+ <h1>Paula Isabella</h1>
+ <p>Mi primer añito ✨</p>
+
+ <section id="cover" class="card">
+   <div class="fairy">🧚🏻‍♀️</div>
+   <p>Un pequeño mundo encantado<br>preparó una sorpresa para ustedes...</p>
+   <div class="envelope" id="envelope" onclick="openInvitation()">
+     <div class="seal">✿</div>
+   </div>
+   <p class="note">TOCÁ EL SOBRE PARA ABRIR</p>
+   <p>Con amor, te invitamos a celebrar<br>un día lleno de magia y ternura.</p>
+   <button onclick="openInvitation()">Abrir mi invitación 💌</button>
+ </section>
+
+ <section id="invitation" class="hidden">
+   <div class="card">
+    <div class="forest">🌸 🍄 🌸</div>
+    <p class="small">Estás invitado a un bosque encantado</p>
+    <h2>¡Cumplo mi primer añito!</h2>
+    <p>Un añito de amor, sonrisas y sueños.<br>
+    Quiero compartir este día tan especial con vos.</p>
+    <div class="divider">✧ ♡ ✧</div>
+    <p class="small">Con mucho cariño, para</p>
+    <h2 id="guest">Papá Rubén &amp; Mamá Aki</h2>
+    <p id="seats">Hemos reservado 2 cupos para ustedes.</p>
+    <div class="fairy">🧚🏻‍♀️ 🍄 🧚🏻‍♀️</div>
+
+    <div class="details">
+      <p class="small">La fecha mágica</p>
+      <h2>27 de diciembre</h2>
+      <p>Domingo · 19:00 horas</p>
+      <div id="countdown">
+       <div class="time"><strong id="days">--</strong><span>DÍAS</span></div>
+       <div class="time"><strong id="hours">--</strong><span>HORAS</span></div>
+       <div class="time"><strong id="minutes">--</strong><span>MINUTOS</span></div>
+       <div class="time"><strong id="seconds">--</strong><span>SEGUNDOS</span></div>
+      </div>
+    </div>
+
+    <div class="details">
+      <p class="small">Nuestro rincón mágico</p>
+      <p id="place">Próximamente compartiremos la ubicación.</p>
+      <button onclick="showLocation()">📍 Ver ubicación</button>
+    </div>
+
+    <button id="musicButton" onclick="toggleMusic()">♫ Activar música mágica</button>
+    <p>Tu presencia hará este cuento aún más hermoso.</p>
+    <div class="forest">🍄 🌷 🌿</div>
+   </div>
+ </section>
+
+ <footer>
+   Con amor, para una celebración inolvidable ♡<br>
+   <span class="fairy">🧚🏻‍♀️</span>
+ </footer>
+</main>
+
+<script>
+// FECHA: 27 de diciembre de 2026, a las 19:00 de Paraguay
+const eventDate = new Date("2026-12-27T19:00:00-03:00").getTime();
+
+function updateCountdown(){
+ const diff=eventDate-Date.now();
+ if(diff<=0){
+  document.getElementById("countdown").innerHTML="¡Llegó nuestro día mágico! ✨";
+  return;
+ }
+ document.getElementById("days").textContent=Math.floor(diff/86400000);
+ document.getElementById("hours").textContent=Math.floor(diff%86400000/3600000);
+ document.getElementById("minutes").textContent=Math.floor(diff%3600000/60000);
+ document.getElementById("seconds").textContent=Math.floor(diff%60000/1000);
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+function openInvitation(){
+ document.getElementById("envelope").classList.add("open");
+ setTimeout(()=>{
+  document.getElementById("cover").classList.add("hidden");
+  document.getElementById("invitation").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+ },650);
+}
+
+// La dirección se agrega cuando esté confirmada.
+function showLocation(){
+ alert("¡Pronto agregaremos la dirección del bosque encantado!");
+}
+
+// Música suave generada al tocar el botón.
+// El navegador requiere una interacción para iniciar el sonido.
+let audioContext=null, musicTimer=null, noteIndex=0;
+let musicOn=false;
+const melody=[523.25,659.25,783.99,659.25,587.33,698.46,783.99,698.46];
+
+function playNote(){
+ if(!audioContext || !musicOn)return;
+ const osc=audioContext.createOscillator();
+ const gain=audioContext.createGain();
+ osc.type="sine";
+ osc.frequency.value=melody[noteIndex%melody.length];
+ gain.gain.setValueAtTime(0.0001,audioContext.currentTime);
+ gain.gain.exponentialRampToValueAtTime(0.045,audioContext.currentTime+0.08);
+ gain.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime+0.65);
+ osc.connect(gain);gain.connect(audioContext.destination);
+ osc.start();osc.stop(audioContext.currentTime+0.7);
+ noteIndex++;
+}
+async function toggleMusic(){
+ const btn=document.getElementById("musicButton");
+ if(musicOn){
+  musicOn=false;clearInterval(musicTimer);
+  if(audioContext)await audioContext.suspend();
+  btn.textContent="♫ Activar música mágica";
+ }else{
+  const AudioCtx=window.AudioContext||window.webkitAudioContext;
+  if(!AudioCtx){alert("Este navegador no permite reproducir la música.");return;}
+  audioContext=audioContext||new AudioCtx();
+  await audioContext.resume();
+  musicOn=true;playNote();
+  musicTimer=setInterval(playNote,650);
+  btn.textContent="♫ Pausar música";
+ }
+}
+
+// Personalización para cada invitado:
+// Para cambiar el nombre, modifica guestName.
+// Para cambiar los cupos, modifica guestSeats.
+const guestName="Papá Rubén & Mamá Aki";
+const guestSeats=2;
+document.getElementById("guest").textContent=guestName;
+document.getElementById("seats").textContent=
+ "Hemos reservado "+guestSeats+" cupos para ustedes.";
+</script>
+</body>
+</html>
